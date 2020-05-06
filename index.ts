@@ -36,13 +36,13 @@ export class ItemServiceRedis implements ItemService {
 
 export class ItemServiceCached implements ItemService {
   constructor(
-    private itemServiceRedis: ItemService,
+    private itemServiceDatabase: ItemService,
     private itemServiceHttp: ItemService
   ) {}
 
   async findById(itemId: string): Promise<Item> {
     try {
-      return await this.itemServiceRedis.findById(itemId);
+      return await this.itemServiceDatabase.findById(itemId);
     } catch (error) {
       return await this.itemServiceHttp.findById(itemId);
     }
