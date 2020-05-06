@@ -48,7 +48,6 @@ afterAll(async (done) => {
 
 beforeEach(async (done) => {
   await redisClient.set(`items:${mockItemId}`, JSON.stringify(mockItem));
-
   httpMock.onGet(`/items/${mockItemId}`).reply(200, mockItem);
 
   done();
@@ -56,7 +55,6 @@ beforeEach(async (done) => {
 
 afterEach(async (done) => {
   await redisClient.del(`items:${mockItemId}`);
-
   httpMock.resetHandlers();
 
   done();
