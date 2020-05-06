@@ -24,13 +24,13 @@ export class ItemServiceRedis implements ItemService {
   constructor(private redisClient: Redis.Redis) {}
 
   async findById(itemId: string): Promise<Item> {
-    const record = await this.redisClient.get(`items:${itemId}`);
+    const item = await this.redisClient.get(`items:${itemId}`);
 
-    if (record === null) {
+    if (item === null) {
       throw Error(`None item found with ID ${itemId}`);
     }
 
-    return JSON.parse(record);
+    return JSON.parse(item);
   }
 }
 
