@@ -12,6 +12,7 @@ export interface ItemService {
 
 export class ItemServiceHttp implements ItemService {
   constructor(private httpClient: AxiosInstance) {}
+
   async findById(itemId: string): Promise<Item> {
     const response = await this.httpClient.get<Item>(`/items/${itemId}`);
 
@@ -21,6 +22,7 @@ export class ItemServiceHttp implements ItemService {
 
 export class ItemServiceRedis implements ItemService {
   constructor(private redisClient: Redis.Redis) {}
+
   async findById(itemId: string): Promise<Item> {
     const record = await this.redisClient.get(`items:${itemId}`);
 
