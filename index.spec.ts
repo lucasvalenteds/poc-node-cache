@@ -6,7 +6,7 @@ import { StartedTestContainer, GenericContainer } from "testcontainers";
 import {
   Item,
   ItemService,
-  ItemServiceHttp,
+  ItemServiceAxios,
   ItemServiceRedis,
   ItemServiceCached,
 } from "./";
@@ -60,21 +60,21 @@ afterEach(async (done) => {
   done();
 });
 
-describe("ItemServiceHttp", () => {
+describe("ItemServiceAxios", () => {
   test("It returns item", async () => {
-    const itemServiceHttp: ItemService = new ItemServiceHttp(httpClient);
+    const itemService: ItemService = new ItemServiceAxios(httpClient);
 
-    const item = await itemServiceHttp.findById(mockItemId);
+    const item = await itemService.findById(mockItemId);
 
     expect(item).toStrictEqual(mockItem);
   });
   test("It throws error", async () => {
     expect.assertions(1);
 
-    const itemServiceHttp: ItemService = new ItemServiceHttp(httpClient);
+    const itemService: ItemService = new ItemServiceAxios(httpClient);
 
     try {
-      await itemServiceHttp.findById("123");
+      await itemService.findById("123");
     } catch (error) {
       expect(error.message).toStrictEqual(
         "Request failed with status code 404"
@@ -85,19 +85,19 @@ describe("ItemServiceHttp", () => {
 
 describe("ItemServiceRedis", () => {
   test("It returns item", async () => {
-    const itemServiceRedis: ItemService = new ItemServiceRedis(redisClient);
+    const itemService: ItemService = new ItemServiceRedis(redisClient);
 
-    const item = await itemServiceRedis.findById(mockItemId);
+    const item = await itemService.findById(mockItemId);
 
     expect(item).toStrictEqual(mockItem);
   });
   test("It throws error", async () => {
     expect.assertions(1);
 
-    const itemServiceRedis: ItemService = new ItemServiceRedis(redisClient);
+    const itemService: ItemService = new ItemServiceRedis(redisClient);
 
     try {
-      await itemServiceRedis.findById("123");
+      await itemService.findById("123");
     } catch (error) {
       expect(error.message).toStrictEqual("None item found with ID 123");
     }

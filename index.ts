@@ -10,7 +10,7 @@ export interface ItemService {
   findById(itemId: string): Promise<Item>;
 }
 
-export class ItemServiceHttp implements ItemService {
+export class ItemServiceAxios implements ItemService {
   constructor(private httpClient: AxiosInstance) {}
 
   async findById(itemId: string): Promise<Item> {
