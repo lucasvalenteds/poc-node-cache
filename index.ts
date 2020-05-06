@@ -3,7 +3,7 @@ import Redis from "ioredis";
 
 export interface Item {
   id: string;
-  price: number;
+  score: number;
 }
 
 export interface ItemService {

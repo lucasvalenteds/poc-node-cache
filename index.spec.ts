@@ -14,7 +14,7 @@ import {
 const mockItemId: string = "cca12a3a-8f34-11ea-8d58-a3e15677259a";
 const mockItem: Item = {
   id: mockItemId,
-  price: 3.5,
+  score: 0,
 };
 
 const httpClient: AxiosInstance = Axios.create();
